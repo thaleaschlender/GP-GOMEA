@@ -42,8 +42,8 @@ public:
     std::vector<Node*> MakeOffspring(const std::vector<Node *> & population, const std::vector<Node*> & parents);
     bool ValidateOffspring(Node * offspring, int max_height, int max_size);
 
-    ConfigurationOptions * conf;
-    TreeInitializer * tree_initializer;
+    ConfigurationOptions * conf; // settings
+    TreeInitializer * tree_initializer; 
     Fitness * fitness;
     SemanticLibrary * semlib;
     SemanticBackpropagator * semback;

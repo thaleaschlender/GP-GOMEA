@@ -4,15 +4,15 @@
 #include "GPGOMEA/Fitness/Fitness.h"
 
 #include <armadillo>
-
+// Multi-objective fitness 
 class MOFitness : public Fitness {
 public:
 
 	MOFitness(std::vector<Fitness*> sub_fitness_functions);
 
-	virtual void SetFitnessCases(const arma::mat & X, FitnessCasesType fct) override;
+	virtual void SetFitnessCases(const arma::mat & X, FitnessCasesType fct) override; // vitual = overriding
 
-	virtual ~MOFitness() {
+	virtual ~MOFitness() { //delete case
 		for (size_t i= 0; i < sub_fitness_functions.size(); i++)
 			delete sub_fitness_functions[i];
 	}

@@ -26,7 +26,7 @@
 #include "GPGOMEA/Operators/Regression/OpLog.h"
 #include "GPGOMEA/Operators/Regression/OpAnalyticLog_01.h"
 #include "GPGOMEA/Operators/Regression/OpSin.h"
-#include "GPGOMEA/Operators/Regression/OpCos.h"
+#include "GPGOMEA/Operators/Regression/OpCos.h"//
 #include "GPGOMEA/Operators/Regression/OpSquare.h"
 #include "GPGOMEA/Operators/Regression/OpSquareRoot.h"
 #include "GPGOMEA/Operators/Regression/OpRegrConstant.h"
@@ -39,16 +39,18 @@
 #include "GPGOMEA/Operators/Boolean/OpXor.h"
 #include "GPGOMEA/Operators/Boolean/OpNot.h"
 
-
-
+#include "GPGOMEA/Operators/OpIf.h"
+#include "GPGOMEA/Operators/Boolean/OpEqual.h"
+#include "GPGOMEA/Operators/Boolean/OpG.h"
+#include "GPGOMEA/Operators/Boolean/OpL.h"
 class ConfigurationOptions {
 public:
 
     // Add here a new operator! (of course, include the .h file above)
     std::vector<Operator *> all_operators = {new OpPlus(), new OpMinus(), new OpTimes(), new OpAnalyticQuotient(),
         new OpAnalyticQuotient01(), new OpNewProtectedDivision(), new OpAnalyticLog01(),
-        new OpExp(), new OpLog(), new OpSin(), new OpCos(), new OpSquare(), new OpSquareRoot(),
-        new OpAnd(), new OpOr(), new OpNand(), new OpNor(), new OpNot(), new OpXor()
+        new OpExp(), new OpLog(), new OpSin(), new OpCos(), new OpSquare(), new OpSquareRoot(),new OpAnd(),
+        new OpIf(),  new OpEqual(), new OpOr(), new OpNand(), new OpNor(), new OpNot(), new OpXor(), new OpG(), new OpL()
     };
 
     ConfigurationOptions * Clone() {

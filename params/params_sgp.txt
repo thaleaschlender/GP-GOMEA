@@ -1,20 +1,20 @@
-train path_to_training_set.dat
-test path_to_test_set.dat
+train Train_Boston.dat #bostonhousing_full.dat
+test Test_Boston.dat
 
 # Termination Criteria
 time -1
-generations 500
+generations 5000
 evaluations -1
 
 # Problem setting
 prob symbreg
 linearscaling
-functions +_-_*_aq
+functions +_-_*_IF_==_>_<
 erc
 
 # Initialization
-initmaxtreeheight 6
-maxtreeheight 12
+initmaxtreeheight 3
+maxtreeheight 6
 maxsize 1000
 popsize 1000
 syntuniqinit 1000

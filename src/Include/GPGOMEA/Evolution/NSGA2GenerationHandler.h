@@ -13,6 +13,8 @@
 #include <vector>
 #include <unordered_map>
 
+//NSGA-II: Multiobjective case. 
+//At selection deletes a dominated solution randomly or the one with the smallest crowding distance
 class NSGA2GenerationHandler : public GenerationHandler {
 public:
 

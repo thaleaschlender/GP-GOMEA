@@ -19,7 +19,7 @@
 #include "GPGOMEA/Variation/TreeInitializer.h"
 #include "GPGOMEA/Utils/ConfigurationOptions.h"
 
-
+//initialises population, and ensures its semantic and syntactic uniqueness
 class PopulationInitializer {
     
 public:

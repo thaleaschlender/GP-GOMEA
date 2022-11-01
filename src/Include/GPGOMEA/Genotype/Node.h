@@ -76,16 +76,16 @@ public:
     int Count_N_NaComp(int count=-1);
 
 
-    Node * parent;
-    std::vector<Node *> children;
+    Node * parent; //reference to parent node
+    std::vector<Node *> children; // references to children nodes
 
-    Operator * op;
-    arma::vec cached_output;
+    Operator * op; // operation the node encapsules
+    arma::vec cached_output; // 
 
     double_t cached_fitness = arma::datum::inf;
 
     arma::vec cached_objectives;
-    double_t crowding_distance;
+    double_t crowding_distance; // is this for multi objective?
     size_t rank;
 
 

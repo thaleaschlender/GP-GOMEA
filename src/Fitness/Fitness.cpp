@@ -1,5 +1,31 @@
 /*
- 
+ Function I used to create boston train and test 
+
+ arma::mat Fitness::ReadFitnessCases(std::string filepath) {
+    arma::mat X;
+    X.load(filepath);
+    cout << "FILE SIZE" << X.n_rows;
+    arma::ivec num_entries = arma::linspace<arma::ivec>(0,(int)X.n_rows-1,(int)X.n_rows);
+    num_entries = arma::shuffle(num_entries);
+    int train_size = (int)(2*X.n_rows/3);
+    int test_size = X.n_rows - train_size;
+    arma::mat training_set(train_size,X.n_cols, arma::fill::zeros);
+    arma::mat testing_set(test_size,X.n_cols, arma::fill::zeros);
+
+    for (int i = 0; i <train_size; i++){
+        training_set.row(i) = X.row(num_entries(i));
+    }
+
+    for (int i =0; i < test_size; i++){
+        testing_set.row(i) = X.row(num_entries(i+train_size));
+    }
+    cout << "__________"<< endl;
+    cout << "MY OWN  train: ( " << training_set.n_rows << "x" << training_set.n_cols - 1 << " )" << endl;
+    cout << "MY OWN  test: ( " << testing_set.n_rows << "x" << testing_set.n_cols - 1 << " )" << endl;
+    training_set.save("Train_Boston.dat", arma_ascii);
+    testing_set.save("Test_Boston.dat", arma_ascii);
+    return X;
+}
 
 
  */
@@ -37,18 +63,19 @@ arma::mat Fitness::ReadFitnessCases(std::string filepath) {
 
 void Fitness::SetFitnessCases(const arma::mat& X, FitnessCasesType fct) {
 
-    arma::vec Y = X.col(X.n_cols - 1);
+    arma::vec Y = X.col(X.n_cols - 1); // target
     arma::mat Xx = X;
-    Xx.shed_col(Xx.n_cols - 1);
+    Xx.shed_col(Xx.n_cols - 1);//Xx features
 
-    if (fct == FitnessCasesTRAIN) {
-        TrainY = Y;
+    if (fct == FitnessCasesTRAIN) { // i data from training set
+        TrainY = Y; 
         TrainX = Xx;
 
-        trainY_mean = arma::mean(TrainY);
-        trainY_std = arma::stddev(TrainY, 1);
+        trainY_mean = arma::mean(TrainY); // calculate mean target
+        trainY_std = arma::stddev(TrainY, 1); // calculate std target
 
-        var_comp_trainY = Y - trainY_mean;
+        var_comp_trainY = Y - trainY_mean; // distance from target mean
+
     } else if (fct == FitnessCasesTEST) {
         TestY = Y;
         TestX = Xx;

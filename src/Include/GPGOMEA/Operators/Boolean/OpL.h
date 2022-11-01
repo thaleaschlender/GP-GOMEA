@@ -5,29 +5,35 @@
  */
 
 
-#ifndef OPAND_H
-#define OPAND_H
+#ifndef OPL_H
+#define OPL_H
 
 #include "GPGOMEA/Operators/Operator.h"
 
-class OpAnd : public Operator {
+class OpL : public Operator {
 public:
 
-    OpAnd() {
+    OpL() {
         arity = 2;
-        name = "AND";
+        name = "<";
         type = OperatorType::opFunction;
     }
 
     Operator * Clone() const override {
-        return new OpAnd(*this);
+        return new OpL(*this);
     }
 
     arma::vec ComputeOutput(const arma::mat& x) override {
         arma::vec res(x.n_rows);
 
-        for (size_t i = 0; i < x.n_rows; i++)
-            res[i] = (bool) x.at(i, 0) & (bool) x.at(i, 1);
+        for (size_t i = 0; i < x.n_rows; i++){
+            if (x.at(i, 0) <  x.at(i, 1)){
+                res[i] = 1;
+            }
+            else{
+                res[i] = 0;
+            }
+        }
 
         return res;
     }
@@ -41,5 +47,5 @@ private:
 
 };
 
-#endif /* OPAND_H */
+#endif /* OPL_H */
 

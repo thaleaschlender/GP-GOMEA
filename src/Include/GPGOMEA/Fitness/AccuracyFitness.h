@@ -18,7 +18,7 @@
 
 #include <map>
 #include <armadillo>
-
+//Implements fitness for classification purposes: the fitness is the weighted accuracy
 class AccuracyFitness : public Fitness {
 public:
 

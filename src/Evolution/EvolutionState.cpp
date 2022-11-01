@@ -4,18 +4,26 @@ using namespace std;
 using namespace arma;
 namespace po = boost::program_options;
 
-void EvolutionState::ReadAndSetDataSets(po::variables_map& vm) {
+/*
+- Read and store training (validation) and test data
+- Read all options from params file
+- Set and fetch fitness values from the probelm type
+*/
 
+//read training and test data
+void EvolutionState::ReadAndSetDataSets(po::variables_map& vm) {
     string train = vm["train"].as<string>();
     string test;
     if (vm.count("test"))
         test = vm["test"].as<string>();
     else
         test = train;
-
+    //read the data in
     mat TR = fitness->ReadFitnessCases(train);
     mat TE = fitness->ReadFitnessCases(test);
+
     mat V;
+    //if we have a validation set
     if (config->validation_perc > 0) {
         size_t nrows_validation = TR.n_rows * config->validation_perc;
         while (V.n_rows < nrows_validation) {
@@ -30,6 +38,7 @@ void EvolutionState::ReadAndSetDataSets(po::variables_map& vm) {
     fitness->SetFitnessCases(TR, FitnessCasesType::FitnessCasesTRAIN);
     fitness->SetFitnessCases(TE, FitnessCasesType::FitnessCasesTEST);
 
+    // print sizes
     cout << "# train: " << train << " ( " << TR.n_rows << "x" << TR.n_cols - 1 << " )" << endl;
     if (!V.empty())
         cout << "# validation: " << config->validation_perc << " of train ( " << V.n_rows << "x" << V.n_cols - 1 << " )" << endl;
@@ -37,13 +46,15 @@ void EvolutionState::ReadAndSetDataSets(po::variables_map& vm) {
 
 
     // ADD VARIABLE TERMINALS  
+    // for each variable in train Xx add to terminals
     for (size_t i = 0; i < TR.n_cols - 1; i++)
         config->terminals.push_back(new OpVariable(i));
 
-    // ADD SR ERC
+    // ADD SR ERC: ephemeral random constants (sample constants from distribution)
     if (config->use_ERC) {
-        double_t biggest_val = arma::max(arma::max(arma::abs(fitness->TrainX)));
-        double_t min_erc = -5 * biggest_val; //min(fitness->TrainY);
+        double_t biggest_val = arma::max(arma::max(arma::abs(fitness->TrainX))); // biggest feature value
+        // window
+        double_t min_erc = -5 * biggest_val; //min(fitness->TrainY); 
         double_t max_erc = 5 * biggest_val; //max(fitness->TrainY);
         config->terminals.push_back(new OpRegrConstant(min_erc, max_erc));
     }
@@ -113,6 +124,7 @@ Fitness * EvolutionState::FetchFitnessFunctionGivenProbName(string prob_name) {
     return fitness;
 }
 
+//before reading datasets
 void EvolutionState::SetOptions(int argc, char* argv[]) {
 
     po::options_description desc("Allowed options");
@@ -279,7 +291,6 @@ void EvolutionState::SetOptions(int argc, char* argv[]) {
         this->fitness = FetchFitnessFunctionGivenProbName(prob_name);
     }
     cout << endl;
-
     // Set % of examples to internally use for validation 
     // (it is done here because it can be used from Python as well)
     if (vm.count("validation")){

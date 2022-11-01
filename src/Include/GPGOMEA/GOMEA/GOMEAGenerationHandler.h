@@ -36,7 +36,7 @@ public:
 
     bool CheckPopulationConverged(const std::vector<Node*>& population) override;
 
-    arma::mat linkage_normalization_matrix;
+    arma::mat linkage_normalization_matrix; 
     bool gomea_converged = false;
 
 private:

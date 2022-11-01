@@ -46,6 +46,7 @@ public:
     
     virtual double_t GetValidationFit(Node * n);
     
+    //fitness stores the data the programmes should model
     arma::mat TrainX;
     arma::vec TrainY;
     arma::mat ValidationX;

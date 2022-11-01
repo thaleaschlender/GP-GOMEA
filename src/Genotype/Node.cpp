@@ -39,7 +39,7 @@ Node::~Node() {
     delete this->op;
 }
 
-arma::vec Node::GetOutput(const arma::mat & x, bool use_caching) {
+arma::vec Node::GetOutput(const arma::mat & x, bool use_caching) { // x = training data matrix
 
     vec out;
     if (use_caching && !cached_output.empty())
@@ -47,7 +47,7 @@ arma::vec Node::GetOutput(const arma::mat & x, bool use_caching) {
 
     if (op->type == OperatorType::opFunction) {
         size_t arity = this->GetArity();
-        mat xx(x.n_rows, arity);
+        mat xx(x.n_rows, arity); // number of training instances * child nodes
         for (size_t i = 0; i < arity; i++)
             xx.col(i) = children[i]->GetOutput(x, use_caching);
         out = op->ComputeOutput(xx);
@@ -146,8 +146,8 @@ void Node::ComputeHeightRecursive(size_t & h, bool only_active) const {
         children[i]->ComputeHeightRecursive(h, only_active);
 }
 
-std::vector<Node*> Node::GetSubtreeNodes(bool only_active, SubtreeParseType pt) {
-    std::vector<Node *> subtree_nodes;
+std::vector<Node*> Node::GetSubtreeNodes(bool only_active, SubtreeParseType pt) { //  preorder parsing by default, activity refers to non used nodes due to arity
+    std::vector<Node *> subtree_nodes; // create vector (may be initialised by simply pushing back onto it)
     if (pt == SubtreeParseType::SubtreeParsePREORDER)
         GetSubtreeNodesPreorderRecursive(subtree_nodes, only_active);
     else if (pt == SubtreeParseType::SubtreeParsePOSTORDER)
@@ -160,7 +160,7 @@ std::vector<Node*> Node::GetSubtreeNodes(bool only_active, SubtreeParseType pt) 
 }
 
 void Node::GetSubtreeNodesPreorderRecursive(std::vector<Node*>& v, bool only_active) {
-    v.push_back(this);
+    v.push_back(this); // add root node to v
     if (only_active) {
         size_t arity = GetArity();
         for (size_t i = 0; i < arity; i++) {

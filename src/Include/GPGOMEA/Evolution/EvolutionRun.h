@@ -74,9 +74,9 @@ public:
     void Initialize();
     void DoGeneration();
 
-    std::vector<Node*> population;
-    ConfigurationOptions * config = NULL;
-    TreeInitializer * tree_initializer = NULL;
+    std::vector<Node*> population; // references to all individuals
+    ConfigurationOptions * config = NULL; // settings
+    TreeInitializer * tree_initializer = NULL; // initialise and grow trees
     GenerationHandler * generation_handler = NULL;
     Fitness * fitness = NULL;
     SemanticLibrary * semantic_library = NULL;

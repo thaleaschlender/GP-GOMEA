@@ -18,7 +18,7 @@
 #include "GPGOMEA/Utils/Utils.h"
 
 #include <armadillo>
-
+// for regression: uses Mean Squared Error
 class SymbolicRegressionFitness : public Fitness {
 public:
 

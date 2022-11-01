@@ -18,9 +18,9 @@ using namespace std;
 
 double_t SymbolicRegressionFitness::ComputeFitness(Node* n, bool use_caching) {
 
-    evaluations++;
+    evaluations++; // variable of fitness class  
 
-    arma::vec P = n->GetOutput(TrainX, use_caching);
+    arma::vec P = n->GetOutput(TrainX, use_caching); 
     double_t fit = ComputeMSE(P, TrainY);
     if (std::isnan(fit)) {
         fit = arma::datum::inf;

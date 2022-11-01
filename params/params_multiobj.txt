@@ -1,5 +1,5 @@
-train path_to_training_set.dat
-test path_to_test_set.dat
+train bostonhousing_full.dat
+test bostonhousing_full.dat
 
 # Termination Criteria
 time -1
