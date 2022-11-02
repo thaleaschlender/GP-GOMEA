@@ -1,20 +1,20 @@
-train Train_Boston.dat #bostonhousing_full.dat
-test Test_Boston.dat
+train dummyCase.dat #Train_Boston.dat #bostonhousing_full.dat
+test dummyCase.dat #Test_Boston.dat
 
 # Termination Criteria
 time -1
-generations 5000
+generations 50
 evaluations -1
 
 # Problem setting
 prob symbreg
-linearscaling
-functions +_-_*_IF_==_>_<
+#linearscaling
+functions AND_OR_IF_==
 erc
 
 # Initialization
-initmaxtreeheight 3
-maxtreeheight 6
+initmaxtreeheight 2
+maxtreeheight 1
 maxsize 1000
 popsize 1000
 syntuniqinit 1000
@@ -30,5 +30,5 @@ tournament 4
 elitism 1
 
 # Other
-seed 1
+seed 9
 parallel 2

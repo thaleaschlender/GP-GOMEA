@@ -40,6 +40,8 @@
 #include "GPGOMEA/Operators/Boolean/OpNot.h"
 
 #include "GPGOMEA/Operators/OpIf.h"
+#include "GPGOMEA/Operators/Op0.h"
+#include "GPGOMEA/Operators/Op1.h"
 #include "GPGOMEA/Operators/Boolean/OpEqual.h"
 #include "GPGOMEA/Operators/Boolean/OpG.h"
 #include "GPGOMEA/Operators/Boolean/OpL.h"
@@ -50,7 +52,7 @@ public:
     std::vector<Operator *> all_operators = {new OpPlus(), new OpMinus(), new OpTimes(), new OpAnalyticQuotient(),
         new OpAnalyticQuotient01(), new OpNewProtectedDivision(), new OpAnalyticLog01(),
         new OpExp(), new OpLog(), new OpSin(), new OpCos(), new OpSquare(), new OpSquareRoot(),new OpAnd(),
-        new OpIf(),  new OpEqual(), new OpOr(), new OpNand(), new OpNor(), new OpNot(), new OpXor(), new OpG(), new OpL()
+        new OpIf(),  new OpEqual(), new OpOr(), new OpNand(), new OpNor(), new OpNot(), new OpXor(), new OpG(), new OpL(), new Op0(), new Op1()
     };
 
     ConfigurationOptions * Clone() {

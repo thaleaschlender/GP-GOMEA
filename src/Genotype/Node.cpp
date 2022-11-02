@@ -228,7 +228,7 @@ std::string Node::GetSubtreeExpression(bool only_active_nodes) {
 
 std::string Node::GetSubtreeHumanExpression() {
     string result = "";
-
+    cout <<  "HELLO" << op->arity;
     GetSubtreeHumanExpressionRecursive(result);
 
     return result;
@@ -277,6 +277,7 @@ size_t Node::GetRelativeIndex() {
     throw std::runtime_error("Node::GetRelativeIndex unreachable code reached.");
 }
 
+// detect semantic introns
 bool Node::IsActive() {
     Node * p = parent;
     if (p == NULL)

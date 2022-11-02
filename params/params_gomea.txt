@@ -1,15 +1,16 @@
-train Train_Boston.dat #bostonhousing_full.dat
-test Test_Boston.dat #bostonhousing_full.dat
+train dummyCase.dat #Train_Boston.dat #bostonhousing_full.dat
+test dummyCase.dat #Test_Boston.dat
+
 
 # Termination Criteria
 time 6000
-generations 1000
+generations 2
 evaluations -1
 
 # Problem setting
 prob symbreg
-linearscaling
-functions +_-_*_p/
+#linearscaling
+functions IF_>_0_1
 erc
 
 # GP-GOMEA specific
@@ -18,9 +19,9 @@ gomfos LT	# This sets the FOS for GP-GOMEA
 
 # Initialization
 ims 5_1		# Uses interleaved multiple runs instead of a single run digit before the underscore = g generations until new run is launched, after underscore = #early stopping generations 
-initmaxtreeheight 5
+initmaxtreeheight 2
 syntuniqinit 1000 # 
 
 # Other
-seed 1
+seed 13
 parallel 2
